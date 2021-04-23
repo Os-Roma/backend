@@ -26,6 +26,8 @@ Populate the tables by running the command `php artisan db:seed`.
 
 ```php
     
+    DatabaseSeeder.php
+
     Gender::factory(5)->create();
     Classification::factory(5)->create();
     Actor::factory()->count(50)->create();
@@ -45,15 +47,12 @@ When seeding the database, a user will be created with the mail `admin@admin.com
 
 
 ```php
-	
-    DatabaseSeeder.php
 
-	 DB::table('users')->insert([
-        'slug' => 'administrator',
-        'name' => 'Administrator',
-        'email' => 'admin@admin.com',
-        'password' => Hash::make('adminadmin'),
-    ]);
+	 User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('adminadmin'),
+        ]);
      
 ```
 
