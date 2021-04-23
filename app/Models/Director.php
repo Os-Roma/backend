@@ -22,8 +22,8 @@ class Director extends Model
     }
 
     /**
-     * @return string
-     */
+     * @return string */
+
     public function getRouteKeyName() // Get the route key for the model.
     {
         return 'slug';
@@ -31,12 +31,12 @@ class Director extends Model
 
     public function movies()
     {
-        return $this->belongToMany(Movie::class);
+        return $this->hasMany(Movie::class);
     }
 
     public function episodes()
     {
-        return $this->belongToMany(Episode::class);
+        return $this->hasMany(Episode::class);
     }
 
     public function scopeSearch($query, $name)

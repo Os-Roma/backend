@@ -41,7 +41,7 @@ class Episode extends Model
 
     public function director()
     {
-        return $this->hasOne(Dircector::class);
+        return $this->belongsTo(Dircector::class);
     }
 
     public function actors()

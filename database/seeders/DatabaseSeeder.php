@@ -35,7 +35,6 @@ class DatabaseSeeder extends Seeder
         });
     }
 
-
     public function array($max){
         $values = [];
 
