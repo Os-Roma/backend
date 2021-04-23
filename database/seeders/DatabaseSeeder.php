@@ -17,13 +17,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->truncate();
-        // DB::table('users')->insert([
-        // 	'slug' => 'administrator',
-        //     'name' => 'Administrator',
-        //     'email' => 'admin@admin.com',
-        //     'password' => Hash::make('adminadmin'),
-        // ]);
+        DB::table('users')->truncate();
+        DB::table('users')->insert([
+        	'slug' => 'administrator',
+            'name' => 'Administrator',
+            'email' => 'admin@admin.com',
+            'password' => Hash::make('adminadmin'),
+        ]);
 
         Gender::factory(5)->make();
         Classification::factory(5)->make();

@@ -29,6 +29,11 @@ class Season extends Model
         return 'slug';
     }
 
+    public function serie()
+    {
+        return $this->belongsTo(Serie::class);
+    }
+
     public function episodes()
     {
         return $this->hasMany(Episode::class);

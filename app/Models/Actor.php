@@ -22,8 +22,8 @@ class Actor extends Model
     }
 
     /**
-     * @return string
-     */
+     * @return string */
+    
     public function getRouteKeyName() // Get the route key for the model.
     {
         return 'slug';
@@ -36,7 +36,7 @@ class Actor extends Model
 
     public function episodes()
     {
-        return $this->morphedByMany(Movie::class, 'actorable', 'actorables');
+        return $this->morphedByMany(Episode::class, 'actorable', 'actorables');
     }
 
     public function scopeSearch($query, $name)

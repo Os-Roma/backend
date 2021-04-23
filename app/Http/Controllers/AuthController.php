@@ -37,8 +37,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     */
+     * @return \Illuminate\Http\JsonResponse */
 
     public function me() // Get the authenticated User.
     {
@@ -46,8 +45,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     */
+     * @return \Illuminate\Http\JsonResponse */
 
     public function logout() // Log the user out (Invalidate the token).
     {
@@ -56,8 +54,7 @@ class AuthController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\JsonResponse
-     */
+     * @return \Illuminate\Http\JsonResponse */
 
     public function refresh() // Refresh a token.
     {

@@ -8,37 +8,32 @@ use App\Models\Movie;
 
 class MovieController extends Controller
 {   
-
     public function index(Request $request)
     {
-        $movies = Movie::with(['actors', 'directors', 'classification', 'gender'])->orderBy('release_date', 'DESC')->paginate(30);   
-
-        return $movies;
+        $movies = Movie::with(['actors', 'directors', 'classification', 'gender'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
+        return response()->json(['movies' => $movies], 200);
     }
 
     public function store(StoreMovieRequest $request)
     {
         $movie = Movie::create($request->all());
-        return $movie;
+        return response()->json(['movie' => $movie], 201);
     }
 
     public function show(Movie $movie)
     {
-        return $movie;
+        return response()->json(['movie' => $movie], 200);
     }
 
-    public function update(Request $request, Movie $movie)
+    public function update(StoreMovieRequest $request, Movie $movie)
     {
-        $movie = Movie::find($id);
         $movie->update($request->all());
-        return $movie;
+        return response()->json(['movie' => $movie], 200);
     }
 
     public function destroy(Movie $Movie)
     { 
         $movie->delete();
-        return response()->json([
-            'deleted' => true
-        ], 200);
+        return response()->json(['deleted' => true], 200);
     }
 }

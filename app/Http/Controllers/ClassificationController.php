@@ -8,37 +8,33 @@ use App\Models\Classification;
 
 class ClassificationController extends Controller
 {   
-
     public function index(Request $request)
     {
-        $classifications = Classification::with(['series', 'movies'])->orderBy('name', 'ASC')->paginate(30);   
-
-        return $classifications;
+        $classifications = Classification::with(['series', 'movies'])->Search($request->name)->orderBy('name', 'ASC')->get();
+        return response()->json(['classifications' => $classifications], 200);
     }
 
     public function store(StoreClassificationRequest $request)
     {
         $classification = Classification::create($request->all());
-        return $classification;
+        return response()->json(['classification' => $classification], 201);
     }
 
     public function show(Classification $classification)
     {
-        return $classification;
+        return response()->json(['classification' => $classification], 200);
     }
 
-    public function update(Request $request, Classification $classification)
+    public function update(StoreClassificationRequest $request, Classification $classification)
     {
-        $classification = Classification::find($id);
+        
         $classification->update($request->all());
-        return $classification;
+        return response()->json(['classification' => $classification], 200);
     }
 
     public function destroy(Classification $classification)
     { 
         $classification->delete();
-        return response()->json([
-            'deleted' => true
-        ], 200);
+        return response()->json(['deleted' => true], 200);
     }
 }

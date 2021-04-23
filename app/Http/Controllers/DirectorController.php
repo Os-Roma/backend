@@ -10,33 +10,30 @@ class DirectorController extends Controller
 {
     public function index(Request $request)
     {
-        $directors = Director::with(['movies', 'episodes'])->orderBy('name', 'ASC')->paginate(50);   
-        return $directors;
+        $directors = Director::with(['movies', 'episodes'])->Search($request->name)->orderBy('name', 'ASC')->get();   
+        return response()->json(['directors' => $directors], 200);
     }
 
     public function store(StoreDirectorRequest $request)
     {
         $director = Director::create($request->all());
-        return $director;
+        return response()->json(['director' => $director], 201);
     }
 
     public function show(Director $director)
     {
-        return $director;
+        return response()->json(['director' => $director], 200);
     }
 
-    public function update(Request $request, Director $director)
+    public function update(StoreDirectorRequest $request, Director $director)
     {
-        $director = Director::find($id);
         $director->update($request->all());
-        return $director;
+        return response()->json(['director' => $director], 200);
     }
 
     public function destroy(Director $director)
     {
         $director->delete();
-        return response()->json([
-            'deleted' => true
-        ], 200);
+        return response()->json(['deleted' => true], 200);
     }
 }

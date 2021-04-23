@@ -8,37 +8,31 @@ use App\Models\Serie;
 
 class SerieController extends Controller
 {   
-
     public function index(Request $request)
     {
-        $series = Serie::with(['actors', 'directors', 'classification', 'gender'])->orderBy('release_date', 'DESC')->paginate(30);   
-
-        return $series;
+        $series = Serie::with(['episodes', 'seassons', 'actors', 'directors' 'classification', 'gender'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
+        return response()->json(['series' => $series], 200);
     }
 
     public function store(StoreSerieRequest $request)
     {
         $serie = Serie::create($request->all());
-        return $serie;
+        return response()->json(['serie' => $serie], 201);
     }
 
     public function show(Serie $serie)
     {
-        return $serie;
+        return response()->json(['serie' => $serie], 200);
     }
 
-    public function update(Request $request, Serie $serie)
+    public function update(StoreSerieRequest $request, Serie $serie)
     {
-        $serie = Serie::find($id);
         $serie->update($request->all());
-        return $serie;
+        return response()->json(['serie' => $serie], 200);
     }
 
     public function destroy(Serie $serie)
     { 
-        $serie->delete();
-        return response()->json([
-            'deleted' => true
-        ], 200);
+        return response()->json(['deleted' => true], 200);
     }
 }
