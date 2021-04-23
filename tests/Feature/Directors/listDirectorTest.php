@@ -10,17 +10,11 @@ use Tests\TestCase;
 class listDirectorTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     *
-     * @test 
-     */
+     * @test */
+
     public function cant_fetch_single_director()
     {   
-
-        Director::factory(20)->create();
-
-        $response = $this->get('/');
-
+        $response = $this->get('directors');
         $response->assertStatus(200);
     }
 }

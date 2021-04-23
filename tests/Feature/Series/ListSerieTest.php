@@ -10,14 +10,11 @@ use Tests\TestCase;
 class ListSerieTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     *
-     * @test 
-     */
+     * @test */
+
     public function can_fetch_single_serie()
     {
-        Serie::factory()->create();
-
+        $response = $this->get('series');
         $response->assertStatus(200);
     }
 }

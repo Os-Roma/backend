@@ -10,17 +10,11 @@ use Tests\TestCase;
 class ListClassificationTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     *
-     * @test
-     */
+     * @test */
+
     public function cant_fetch_single_classification()
     {   
-
-        Classification::factory(5)->create();
-        
-        $response = $this->get('/');
-
+        $response = $this->get('classifications');
         $response->assertStatus(200);
     }
 }

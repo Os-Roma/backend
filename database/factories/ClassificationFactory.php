@@ -22,7 +22,6 @@ class ClassificationFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->slug,
             'name' => $this->faker->sentence(2),
             'description' => $this->faker->text()
         ];

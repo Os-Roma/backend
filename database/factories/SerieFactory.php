@@ -22,7 +22,6 @@ class SerieFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->slug,
             'title' => $this->faker->sentence(4),
             'overview' => $this->faker->text(),
             'release_date' => now(),

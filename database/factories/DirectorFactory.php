@@ -22,7 +22,6 @@ class DirectorFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->slug,
             'name' => $this->faker->name,
             'birth_date' => now()
         ];

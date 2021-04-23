@@ -22,7 +22,6 @@ class GenderFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->word,
             'name' => $this->faker->word,
             'description' => $this->faker->text(),
         ];

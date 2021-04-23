@@ -22,9 +22,8 @@ class SeasonFactory extends Factory
     public function definition()
     {
         return [
-            'slug' => $this->faker->slug,
-            'title' => $this->faker->sentece(3),
-            'overview' => $this->faker->paragraphs(3, true),
+            'title' => $this->faker->sentence(3),
+            'overview' => $this->faker->text(),
             'release_date' => now(),
             'serie_id' => rand(1, 10)
         ];
