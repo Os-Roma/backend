@@ -13,7 +13,7 @@ This challenge aims to test basic skills in PHP development and a bit of data / 
 - Api authentication with JWT.
 - Friendly routes with slug generator.
 
-## requirements to deploy
+## Requirements to deploy
 
 Please clone the repository and configure the `.env` file.
 
