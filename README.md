@@ -23,19 +23,9 @@ Run the migrations with `php artisan migrate`.
 
 Populate the tables by running the command `php artisan db:seed`.
 
-Al sembrar la base de datos, se creará un usuario con el mail `admin@admin.com` y su contraseña será `adminadmin`
 
-```
-	
-	DatabaseSeeder.php
-
-	 DB::table('users')->insert([
-        'slug' => 'administrator',
-        'name' => 'Administrator',
-        'email' => 'admin@admin.com',
-        'password' => Hash::make('adminadmin'),
-    ]);
-
+```php
+    
     Gender::factory(5)->create();
     Classification::factory(5)->create();
     Actor::factory()->count(50)->create();
@@ -49,6 +39,22 @@ Al sembrar la base de datos, se creará un usuario con el mail `admin@admin.com`
         $episode->actors()->attach($this->array(rand(1, 50)));
     });
 
+```
+
+When seeding the database, a user will be created with the mail `admin@admin.com` and its password will be `adminadmin`.
+
+
+```php
+	
+    DatabaseSeeder.php
+
+	 DB::table('users')->insert([
+        'slug' => 'administrator',
+        'name' => 'Administrator',
+        'email' => 'admin@admin.com',
+        'password' => Hash::make('adminadmin'),
+    ]);
+     
 ```
 
 
