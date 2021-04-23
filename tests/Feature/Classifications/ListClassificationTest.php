@@ -14,7 +14,7 @@ class ListClassificationTest extends TestCase
 
     public function cant_fetch_single_classification()
     {   
-        $response = $this->get('classifications');
+        $response = $this->get('api/auth/classifications');
         $response->assertStatus(200);
     }
 }

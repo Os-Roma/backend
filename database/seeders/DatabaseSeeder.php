@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->truncate();
         DB::table('users')->insert([
-        	'slug' => 'administrator',
+            'slug' => 'administrator',
             'name' => 'Administrator',
             'email' => 'admin@admin.com',
             'password' => Hash::make('adminadmin'),
