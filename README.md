@@ -56,9 +56,8 @@ When seeding the database, a user will be created with the mail `admin@admin.com
      
 ```
 
-
-<!-- You can run the tests by executing the `php artisan test` command. -->
+You can run the tests by executing the `php artisan test` command.
 
 Lift up the server with `php artisan serve`.
 
-***  ***
+Use [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/) to test the endpoints.
