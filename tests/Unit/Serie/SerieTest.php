@@ -2,17 +2,25 @@
 
 namespace Tests\Unit\Serie;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use App\Models\Serie;
+use Illuminate\Database\Eloquent\Collection;
 
 class SerieTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    /** @test */
+    
+    public function a_serie_has_many_seasons()
     {
-        $this->assertTrue(true);
+        $serie = new Serie;
+        $this->assertInstanceOf(Collection::class, $serie->seasons);
+    }
+
+    /** @test */
+    
+    public function a_serie_has_many_episodes()
+    {
+        $serie = new Serie;
+        $this->assertInstanceOf(Collection::class, $serie->episodes);
     }
 }

@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ActorTest extends TestCase
 {
-    /** 
-    * @test */
+    /** @test */
 
     public function a_actor_morphed_by_many_movie()
     {
         $actor = new Actor;
         $this->assertInstanceOf(Collection::class, $actor->movies);
     }
+
+    /** @test */
 
     public function a_actor_morphed_by_many_episode()
     {

@@ -11,11 +11,13 @@ class ListSerieTest extends TestCase
 {
     /** @test */
 
-    public function list_all_of_series()
+    public function list_all_series()
     {
         $response = $this->get('/api/auth/series');
         $response->assertStatus(200);
     }
+
+    /** @test */
 
     public function filter_series_for_name()
     {
@@ -23,7 +25,9 @@ class ListSerieTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function cant_fetch_single_serie()
+    /** @test */
+
+    public function fetch_single_serie()
     {   
     	$serie = Serie::first();
         $response = $this->get('/api/auth/series/'.$serie->slug );

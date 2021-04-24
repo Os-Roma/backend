@@ -12,11 +12,13 @@ class ListClassificationTest extends TestCase
     /**
      * @test */
 
-    public function list_all_of_classifications()
+    public function list_all_classifications()
     {
         $response = $this->get('/api/auth/classifications');
         $response->assertStatus(200);
     }
+
+    /** @test */
 
     public function filter_classifications_for_name()
     {
@@ -24,7 +26,9 @@ class ListClassificationTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function cant_fetch_single_classification()
+    /** @test */
+
+    public function fetch_single_classification()
     {   
     	$classification = Classification::first();
         $response = $this->get('/api/auth/classifications/'.$classification->slug );

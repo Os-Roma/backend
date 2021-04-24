@@ -7,16 +7,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class listEpisodeTest extends TestCase
+class ListEpisodeTest extends TestCase
 {
     /**
      * @test */
 
-    public function list_all_of_episodes()
+    public function list_all_episodes()
     {
         $response = $this->get('/api/auth/episodes');
         $response->assertStatus(200);
     }
+
+    /** @test */
 
     public function filter_episodes_for_title()
     {
@@ -24,7 +26,9 @@ class listEpisodeTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function cant_fetch_single_episode()
+    /** @test */
+
+    public function fetch_single_episode()
     {   
         $episode = Episode::first();
         $response = $this->get('/api/auth/episodes/'.$episode->slug );

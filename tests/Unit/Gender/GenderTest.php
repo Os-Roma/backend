@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GenderTest extends TestCase
 {
-    /**
-     * @test */
+    /** @test */
     
     public function a_gender_belongs_to_many_movies()
     {
         $gender = new Gender;
         $this->assertInstanceOf(Collection::class, $gender->movies);
     }
+
+    /** @test */
 
     public function a_gender_belongs_to_many_series()
     {

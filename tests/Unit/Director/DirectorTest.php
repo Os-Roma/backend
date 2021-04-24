@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Collection;
 
 class DirectorTest extends TestCase
 {
-    /**
-     * @test */
+    /** @test */
 
     public function a_director_has_many_movies()
     {
         $director = new Director;
         $this->assertInstanceOf(Collection::class, $director->movies);
     }
+
+    /** @test */
 
     public function a_director_has_many_episodes()
     {

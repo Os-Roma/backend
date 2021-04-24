@@ -7,16 +7,17 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class listActorTest extends TestCase
+class ListActorTest extends TestCase
 {
-    /**
-     * @test */
+    /** @test */
 
-    public function list_all_of_actors()
+    public function list_all_actors()
     {
         $response = $this->get('/api/auth/actors');
         $response->assertStatus(200);
     }
+
+    /** @test */
 
     public function filter_actors_for_name()
     {
@@ -24,9 +25,11 @@ class listActorTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function cant_fetch_single_actor()
+    /** @test */
+    
+    public function fetch_single_actor()
     {   
-    	$actor = Actor::first();
+        $actor = Actor::first();
         $response = $this->get('/api/auth/actors/'.$actor->slug );
         $response->assertStatus(200);
     }

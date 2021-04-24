@@ -2,17 +2,18 @@
 
 namespace Tests\Unit\Movie;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use App\Models\Movie;
+use Illuminate\Database\Eloquent\Collection;
 
 class MovieTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
+    /** @test */
+
+    public function a_movie_morph_to_many_actors()
     {
-        $this->assertTrue(true);
+        $movie = new Movie;
+        $this->assertInstanceOf(Collection::class, $movie->actors);
     }
+
 }

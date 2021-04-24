@@ -7,16 +7,18 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class listSeasonTest extends TestCase
+class ListSeasonTest extends TestCase
 {
     /**
      * @test */
 
-    public function list_all_of_seasons()
+    public function list_all_seasons()
     {
         $response = $this->get('/api/auth/seasons');
         $response->assertStatus(200);
     }
+
+    /** @test */
 
     public function filter_seasons_for_title()
     {
@@ -24,7 +26,9 @@ class listSeasonTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function cant_fetch_single_Season()
+    /** @test */
+
+    public function fetch_single_Season()
     {   
     	$season = Season::first();
         $response = $this->get('/api/auth/seasons/'.$season->slug );

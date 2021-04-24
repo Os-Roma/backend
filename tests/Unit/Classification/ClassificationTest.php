@@ -9,16 +9,17 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ClassificationTest extends TestCase
 {
-    /**
-     * @test */
+    /** @test */
 
-    public function a_classification_belongs_to_many_movies()
+    public function a_classification_has_many_movies()
     {
         $classification = new Classification;
         $this->assertInstanceOf(Collection::class, $classification->movies);
     }
 
-    public function a_classification_belongs_to_many_series()
+    /** @test */
+
+    public function a_classification_has_many_series()
     {
         $classification = new Classification;
         $this->assertInstanceOf(Collection::class, $classification->series);
