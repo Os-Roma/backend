@@ -29,11 +29,6 @@ class Episode extends Model
         return 'slug';
     }
 
-    public function serie()
-    {
-        return $this->belongsToThrough(Season::class, Serie::class);
-    }
-
     public function season()
     {
         return $this->belongsTo(Season::class);
@@ -47,16 +42,6 @@ class Episode extends Model
     public function actors()
     {
         return $this->morphToMany(Actor::class, 'actorable');
-    }
-
-    public function classification()
-    {
-        return $this->hasOneThrough(Classification::class, Serie::class);
-    }
-
-    public function gender()
-    {
-        return $this->hasOneThrough(Gender::class, Serie::class);
     }
 
     public function scopeSearch($query, $title)

@@ -10,7 +10,7 @@ class EpisodeController extends Controller
 {
     public function index(Request $request)
     {
-        $episodes = Episode::with(['serie', 'season', 'director', 'actors', 'classification', 'gender'])->Search($request->title)->orderBy('release_date', 'DESC')->get();   
+        $episodes = Episode::with(['season.serie', 'director', 'actors'])->Search($request->title)->orderBy('release_date', 'DESC')->get();   
         return response()->json(['episodes' => $episodes], 200);
     }
 

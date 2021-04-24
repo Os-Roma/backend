@@ -2,36 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSeassonRequest;
+use App\Http\Requests\StoreSeasonRequest;
 use Illuminate\Http\Request;
-use App\Models\Seasson;
+use App\Models\Season;
 
-class SeassonController extends Controller
+class SeasonController extends Controller
 {   
     public function index(Request $request)
     {
-        $seassons = Seasson::with(['serie', 'episodes'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);   
-        return response()->json(['seassons' => $seassons], 200);
+        $seasons = Season::with(['serie', 'episodes.director'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);   
+        return response()->json(['seasons' => $seasons], 200);
     }
 
-    public function store(StoreSeassonRequest $request)
+    public function store(StoreSeasonRequest $request)
     {
-        $seasson = Seasson::create($request->all());
-        return response()->json(['seasson' => $seasson], 201);
+        $season = Season::create($request->all());
+        return response()->json(['season' => $season], 201);
     }
 
-    public function show(Seasson $seasson)
+    public function show(Season $season)
     {
-        return response()->json(['seasson' => $seasson], 200);
+        return response()->json(['season' => $season], 200);
     }
 
-    public function update(StoreSeassonRequest $request, Seasson $seasson)
+    public function update(StoreSeasonRequest $request, Season $season)
     {
-        $seasson->update($request->all());
-        return response()->json(['seasson' => $seasson], 200);
+        $season->update($request->all());
+        return response()->json(['season' => $season], 200);
     }
 
-    public function destroy(Seasson $seasson)
+    public function destroy(Season $season)
     { 
         $seasson->delete();
         return response()->json(['deleted' => true], 200);
