@@ -31,12 +31,12 @@ class Classification extends Model
 
     public function movies()
     {
-        return $this->belongsToMany(Movie::class);
+        return $this->hasMany(Movie::class);
     }
 
     public function series()
     {
-        return $this->belongsToMany(Serie::class);
+        return $this->hasMany(Serie::class);
     }
 
     public function scopeSearch($query, $name)

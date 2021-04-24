@@ -31,7 +31,7 @@ class Episode extends Model
 
     public function serie()
     {
-        return $this->belongsTo(Serie::class);
+        return $this->belongsToThrough(Season::class, Serie::class);
     }
 
     public function season()
@@ -41,7 +41,7 @@ class Episode extends Model
 
     public function director()
     {
-        return $this->belongsTo(Dircector::class);
+        return $this->belongsTo(Director::class);
     }
 
     public function actors()

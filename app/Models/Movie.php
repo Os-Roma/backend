@@ -31,7 +31,7 @@ class Movie extends Model
 
     public function director()
     {
-        return $this->belongsTo(Dircector::class);
+        return $this->belongsTo(Director::class);
     }
 
     public function actors()
@@ -41,12 +41,12 @@ class Movie extends Model
 
     public function classification()
     {
-        return $this->hasOne(Classification::class);
+        return $this->belongsTo(Classification::class);
     }
 
     public function gender()
     {
-        return $this->hasOne(Gender::class);
+        return $this->belongsTo(Gender::class);
     }
 
     public function scopeSearch($query, $title)

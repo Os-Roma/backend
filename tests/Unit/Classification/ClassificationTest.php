@@ -11,16 +11,16 @@ class ClassificationTest extends TestCase
 {
     /**
      * @test */
-    
+
     public function a_classification_belongs_to_many_movies()
     {
         $classification = new Classification;
         $this->assertInstanceOf(Collection::class, $classification->movies);
     }
 
-    public function a_classification_belongs_to_many_episodes()
+    public function a_classification_belongs_to_many_series()
     {
         $classification = new Classification;
-        $this->assertInstanceOf(Collection::class, $classification->episodes);
+        $this->assertInstanceOf(Collection::class, $classification->series);
     }
 }

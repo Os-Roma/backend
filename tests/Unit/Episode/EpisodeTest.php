@@ -2,17 +2,11 @@
 
 namespace Tests\Unit\Episode;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
+use App\Models\Episode;
+use Illuminate\Database\Eloquent\Collection;
 
 class EpisodeTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $this->assertTrue(true);
-    }
+    /** @test */
 }

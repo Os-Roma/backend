@@ -10,7 +10,7 @@ class MovieController extends Controller
 {   
     public function index(Request $request)
     {
-        $movies = Movie::with(['actors', 'directors', 'classification', 'gender'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
+        $movies = Movie::with(['actors', 'director', 'classification', 'gender'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
         return response()->json(['movies' => $movies], 200);
     }
 

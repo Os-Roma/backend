@@ -31,32 +31,22 @@ class Serie extends Model
 
     public function episodes()
     {
-        return $this->hasMany(Episode::class);
+        return $this->hasManyThrough(Episode::class, Season::class);
     }
 
     public function seasons()
     {
-        return $this->hasManyThrough(Season::class, Episode::class);
-    }
-
-    public function directors()
-    {
-        return $this->hasManyThrough(Dircector::class, Episode::class);
-    }
-
-    public function actors()
-    {
-        return $this->hasManyThrough(Actor::class, Episode::class);
+        return $this->hasMany(Season::class);
     }
 
     public function classification()
     {
-        return $this->hasOne(Classification::class);
+        return $this->belongsTo(Classification::class);
     }
 
     public function gender()
     {
-        return $this->hasOne(Gender::class);
+        return $this->belongsTo(Gender::class);
     }
 
     public function scopeSearch($query, $title)
