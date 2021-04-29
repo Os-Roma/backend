@@ -26,8 +26,7 @@ class ClassificationController extends Controller
     }
 
     public function update(StoreClassificationRequest $request, Classification $classification)
-    {
-        
+    {   
         $classification->update($request->all());
         return response()->json(['classification' => $classification], 200);
     }

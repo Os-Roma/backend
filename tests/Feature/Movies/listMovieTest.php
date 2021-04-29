@@ -32,6 +32,7 @@ class ListMovieTest extends TestCase
     	$movie = Movie::first();
         $response = $this->get('/api/auth/movies/'.$movie->slug );
         $response->assertStatus(200);
+        $response->assertSee($movie->title);
     }
 
 }

@@ -27,6 +27,7 @@ class StoreSeasonRequest extends FormRequest
             'title' => 'required|max:255',
             'overview' => 'required|max:1500',
             'release_date' => 'required|date',
+            'serie_id' => 'required|numeric',
         ];
     }
 }

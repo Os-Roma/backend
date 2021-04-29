@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace {{ namespace }};
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreEpisodeRequest extends FormRequest
+class {{ class }} extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class StoreEpisodeRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,11 +24,7 @@ class StoreEpisodeRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|max:255',
-            'overview' => 'required|max:1500',
-            'release_date' => 'required|date',
-            'season_id' => 'required|numeric',
-            'director_id' => 'required|numeric',
+            //
         ];
     }
 }

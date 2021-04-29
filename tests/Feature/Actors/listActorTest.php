@@ -13,7 +13,7 @@ class ListActorTest extends TestCase
 
     public function list_all_actors()
     {
-        $response = $this->get('/api/auth/actors');
+        $response = $this->getJson('/api/auth/actors');
         $response->assertStatus(200);
     }
 
@@ -21,7 +21,7 @@ class ListActorTest extends TestCase
 
     public function filter_actors_for_name()
     {
-        $response = $this->get('/api/auth/actors?name=Ana');
+        $response = $this->get('/api/auth/actors?name=Foo');
         $response->assertStatus(200);
     }
 
@@ -30,7 +30,22 @@ class ListActorTest extends TestCase
     public function fetch_single_actor()
     {   
         $actor = Actor::first();
-        $response = $this->get('/api/auth/actors/'.$actor->slug );
+        $response = $this->getJson('/api/auth/actors/'.$actor->getRouteKey());
+
         $response->assertStatus(200);
+        $response->assertExactJson([
+            'data' => [
+                'type' => 'actors',
+                'id' => (string) $actor->getRouteKey(),
+                'attributes' => [
+                    'name' => $actor->name,
+                    'slug' => $actor->slug,
+                    'birth_date' => $actor->bith_date,
+                ],
+                'links' => [
+                    'self' => url('/api/auth/actors/'.$actor->getRouteKey())
+                ]
+            ]
+        ]);
     }
 }

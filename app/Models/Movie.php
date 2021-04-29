@@ -12,7 +12,7 @@ class Movie extends Model
     use HasFactory, HasSlug;
 
     protected $table = 'movies';
-    protected $fillable = [ 'title', 'overview', 'release_date' ];
+    protected $fillable = [ 'title', 'overview', 'release_date', 'director_id', 'gender_id', 'classification_id' ];
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {

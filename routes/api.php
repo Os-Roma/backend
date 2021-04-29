@@ -20,12 +20,12 @@ Route::group([
 
 	Route::apiResources([
 	             'movies' => MovieController::class,
-	             'series' => SerieController::class,
 	             'actors' => ActorController::class,
 	          'directors' => DirectorController::class,
 	           'episodes' => EpisodeController::class,
 	   		    'seasons' => SeasonController::class,
 	            'genders' => GenderController::class,
 	    'classifications' => ClassificationController::class,
+	             'series' => SerieController::class,
 	]);
 });

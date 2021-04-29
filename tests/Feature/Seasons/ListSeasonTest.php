@@ -28,10 +28,11 @@ class ListSeasonTest extends TestCase
 
     /** @test */
 
-    public function fetch_single_Season()
+    public function fetch_single_season()
     {   
     	$season = Season::first();
         $response = $this->get('/api/auth/seasons/'.$season->slug );
         $response->assertStatus(200);
+        $response->assertSee($season->title);
     }
 }

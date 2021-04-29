@@ -27,6 +27,8 @@ class MovieController extends Controller
 
     public function update(StoreMovieRequest $request, Movie $movie)
     {
+
+        // dd($movie);
         $movie->update($request->all());
         return response()->json(['movie' => $movie], 200);
     }

@@ -12,7 +12,7 @@ class Episode extends Model
     use HasFactory, HasSlug;
 
     protected $table = 'episodes';
-    protected $fillable = [ 'title', 'overview', 'release_date' ];
+    protected $fillable = [ 'title', 'overview', 'release_date', 'season_id', 'director_id' ];
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {

@@ -12,7 +12,7 @@ class Serie extends Model
     use HasFactory, HasSlug;
 
     protected $table = 'series';
-    protected $fillable = [ 'title', 'overview', 'release_date' ];
+    protected $fillable = [ 'title', 'overview', 'release_date', 'gender_id', 'classification_id' ];
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {

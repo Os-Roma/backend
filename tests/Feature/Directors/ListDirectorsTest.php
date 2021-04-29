@@ -32,6 +32,7 @@ class ListDirectorTest extends TestCase
     	$director = Director::first();
         $response = $this->get('/api/auth/directors/'.$director->slug );
         $response->assertStatus(200);
+        $response->assertSee($director->name);
     }
 
 }

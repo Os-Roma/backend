@@ -32,6 +32,7 @@ class ListGenderTest extends TestCase
     	$gender = Gender::first();
         $response = $this->get('/api/auth/genders/'.$gender->slug );
         $response->assertStatus(200);
+        $response->assertSee($gender->name);
     }
 
 }

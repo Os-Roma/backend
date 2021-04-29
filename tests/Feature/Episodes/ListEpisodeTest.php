@@ -33,5 +33,6 @@ class ListEpisodeTest extends TestCase
         $episode = Episode::first();
         $response = $this->get('/api/auth/episodes/'.$episode->slug );
         $response->assertStatus(200);
+        $response->assertSee($episode->title);
     }
 }

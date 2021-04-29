@@ -12,7 +12,7 @@ class Season extends Model
     use HasFactory, HasSlug;
 
     protected $table = 'seasons';
-    protected $fillable = [ 'title', 'overview', 'release_date' ];
+    protected $fillable = [ 'title', 'overview', 'release_date', 'serie_id' ];
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {

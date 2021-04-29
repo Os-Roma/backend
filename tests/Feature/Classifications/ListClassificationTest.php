@@ -13,7 +13,7 @@ class ListClassificationTest extends TestCase
      * @test */
 
     public function list_all_classifications()
-    {
+    {   
         $response = $this->get('/api/auth/classifications');
         $response->assertStatus(200);
     }
@@ -33,5 +33,6 @@ class ListClassificationTest extends TestCase
     	$classification = Classification::first();
         $response = $this->get('/api/auth/classifications/'.$classification->slug );
         $response->assertStatus(200);
+        $response->assertSee($classification->name);
     }
 }
