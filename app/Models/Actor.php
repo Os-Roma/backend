@@ -16,7 +16,7 @@ class Actor extends Model
 
     protected     $table = 'actors';
     protected  $fillable = [ 'name', 'birth_date' ];
-    public $allowedSorts = [ 'name', 'birth_date' ];
+    public $allowedSorts = [ 'name', 'birth_date', 'created_at', 'updated_at' ];
 
     public function newEloquentBuilder($query)
     {
