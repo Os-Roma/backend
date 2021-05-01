@@ -10,7 +10,7 @@ class SerieController extends Controller
 {   
     public function index(Request $request)
     {
-        $series = Serie::with([ 'seasons', 'classification', 'gender'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
+        $series = Serie::with([ 'seasons'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
         return response()->json(['series' => $series], 200);
     }
 

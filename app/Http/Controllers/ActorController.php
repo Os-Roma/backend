@@ -3,24 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\{ActorResource, ActorCollection};
-use App\Http\Requests\StoreActorRequest;
+use App\Http\Requests\{StoreActorRequest, PaginateRequest};
 use Illuminate\Http\Request;
 use App\Models\Actor;
-use Illuminate\Support\Str;
 
 class ActorController extends Controller
 {   
-    public function index(Request $request)
-    {
-        $direction = 'asc';
-        $sortField = request('sort');
-
-        if (Str::of($sortField)->startsWith('-')) {
-            $direction = 'desc';
-            $sortField = Str::of($sortField)->substr(1);
-        }
- 
-        $actors = Actor::with(['movies', 'episodes'])->Search($request->name)->orderBy('name', 'ASC')->get();   
+    public function index(PaginateRequest $request)
+    {   
+        $actors = Actor::fields(request('fields'))->search(request('search'))->sort(request('sort'))->paginate(request('per_page'));
         return ActorCollection::make($actors);
     }
 
@@ -31,7 +22,7 @@ class ActorController extends Controller
     }
 
     public function show(Actor $actor)
-    {
+    {   
         return ActorResource::make($actor);
     }
 

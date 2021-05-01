@@ -10,7 +10,7 @@ class SeasonController extends Controller
 {   
     public function index(Request $request)
     {
-        $seasons = Season::with(['serie', 'episodes.director'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);   
+        $seasons = Season::with(['serie'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);   
         return response()->json(['seasons' => $seasons], 200);
     }
 

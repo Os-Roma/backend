@@ -20,10 +20,13 @@ class ActorCollection extends ResourceCollection
         return [
             'data' => $this->collection,
             'links' => [
-                'self' => url('/api/auth/actors/')
+                'self' => url('/api/auth/actors')
             ],
             'meta' => [
                 'actors_count' => $this->collection->count()
+            ],
+            'jsonapi' => [
+                'version' => "1.0"
             ]
         ];
     }
