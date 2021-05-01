@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+// use Illuminate\Support\Str;
 
 class ActorResource extends JsonResource
 {
@@ -14,6 +15,47 @@ class ActorResource extends JsonResource
      */
     public function toArray($request)
     {   
+
+        // $includes = explode(',', $params);
+        // $includes = Str::of($params)->explode(',');
+
+       
+
+        // if (array_search('episodes', $includes, true)) 
+        
+
+
+        // var_export ($includes);
+
+        // incluir solo un atributo en una respuesta de recurso si se cumple una condición determinada
+       // 'secret' => $this->when(Auth::user()->isAdmin(), 'secret-value'),
+
+        // El whenmétodo también acepta un cierre como segundo argumento, lo que le permite calcular el valor resultante solo si la condición dada es true:
+        // 'secret' => $this->when(Auth::user()->isAdmin(), function () {
+        //     return 'secret-value';
+        // }),
+
+        // puede tener varios atributos que solo deben incluirse en la respuesta del recurso en función de la misma condición.
+        // $this->mergeWhen(Auth::user()->isAdmin(), [
+        //     'first-secret' => 'value',
+        //     'second-secret' => 'value',
+        // ]),
+
+
+        // Incluir relaciones de forma condicional en sus respuestas de recursos en función de si la relación ya se ha cargado en el modelo. 
+        // 'posts' => PostResource::collection($this->whenLoaded('posts')),
+
+        // puede incluir condicionalmente datos de las tablas intermedias de relaciones de muchos a muchos utilizando el whenPivotLoadedmétodo. 
+        // 'expires_at' => $this->whenPivotLoaded('role_user', function () {
+        //     return $this->pivot->expires_at;
+        // }),
+
+        // Si su tabla intermedia usa un descriptor de acceso diferente a pivot, puede usar el whenPivotLoadedAsmétodo:
+        // 'expires_at' => $this->whenPivotLoadedAs('subscription', 'role_user', function () {
+        //     return $this->subscription->expires_at;
+        // }),
+
+
         return [
             'type' => 'actors',
             'id' => (string) $this->resource->getRouteKey(),
@@ -27,8 +69,9 @@ class ActorResource extends JsonResource
             'links' => [
                 'self' => url('/api/auth/actors/'.$this->resource->getRouteKey())
             ],
-            'included' => $this->when(strstr(request('include'), 'movies') == true, $this->resource->movies ),
-                        $this->when(strstr(request('include'), 'episodes') == true, $this->resource->episodes ),
+            'included' => $this->when(strstr(request('include'), 'movies'), $this->resource->movies ),
+                        $this->when(strstr(request('include'), 'episodes'), $this->resource->episodes ),
+            
         ];
     }
 }
