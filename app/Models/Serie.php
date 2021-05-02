@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\{HasSorts, HasFields};
+use App\Models\Builders\SerieBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Serie extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, HasSorts, HasFields;
 
     protected $table = 'series';
-    protected $fillable = [ 'title', 'overview', 'release_date', 'gender_id', 'classification_id' ];
+    protected $fillable = [ 'title', 'overview', 'release_date', 'genre_id', 'classification_id' ];
+    public $allowedSorts = [ 'title', 'overview', 'release_date', 'created_at', 'updated_at' ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new SerieBuilder($query);
+    }
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {
@@ -44,15 +52,8 @@ class Serie extends Model
         return $this->belongsTo(Classification::class);
     }
 
-    public function gender()
+    public function genre()
     {
-        return $this->belongsTo(Gender::class);
-    }
-
-    public function scopeSearch($query, $title)
-    {
-        if (trim($title) != "") {
-            return $query->where('title', 'LIKE', "%$title%");
-        }
+        return $this->belongsTo(Genre::class);
     }
 }

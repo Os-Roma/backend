@@ -2,33 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSeasonRequest;
+use App\Http\Resources\Season\{SeasonResource, SeasonCollection};
+use App\Http\Requests\{StoreSeasonRequest, PaginateRequest};
 use Illuminate\Http\Request;
 use App\Models\Season;
 
 class SeasonController extends Controller
 {   
-    public function index(Request $request)
+    public function index(PaginateRequest $request)
     {
-        $seasons = Season::with(['serie'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);   
-        return response()->json(['seasons' => $seasons], 200);
+        $seasons = Season::fields(request('fields'))
+                        ->title(request('title'))
+                        ->overview(request('overview'))
+                        ->release_date(request('release_date'))
+                        ->sort(request('sort'))
+                        ->paginate(request('per_page'));
+
+        return SeasonCollection::make($seasons);
     }
 
     public function store(StoreSeasonRequest $request)
     {
         $season = Season::create($request->all());
-        return response()->json(['season' => $season], 201);
+        return SeasonResource::make($season);
     }
 
     public function show(Season $season)
     {
-        return response()->json(['season' => $season], 200);
+        return SeasonResource::make($season);
     }
 
     public function update(StoreSeasonRequest $request, Season $season)
     {
         $season->update($request->all());
-        return response()->json(['season' => $season], 200);
+        return SeasonResource::make($season);
     }
 
     public function destroy(Season $season)

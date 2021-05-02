@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{AuthController, MovieController, SerieController, ActorController, DirectorController, GenderController, ClassificationController, EpisodeController, SeasonController };
+use App\Http\Controllers\{AuthController, MovieController, SerieController, ActorController, DirectorController, GenreController, ClassificationController, EpisodeController, SeasonController };
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -24,7 +24,7 @@ Route::group([
 	          'directors' => DirectorController::class,
 	           'episodes' => EpisodeController::class,
 	   		    'seasons' => SeasonController::class,
-	            'genders' => GenderController::class,
+	            'genres' => GenreController::class,
 	    'classifications' => ClassificationController::class,
 	             'series' => SerieController::class,
 	]);

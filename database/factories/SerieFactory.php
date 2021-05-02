@@ -25,7 +25,7 @@ class SerieFactory extends Factory
             'title' => $this->faker->sentence(4),
             'overview' => $this->faker->text(),
             'release_date' => now(),
-            'gender_id' => rand(1, 5),
+            'genre_id' => rand(1, 5),
             'classification_id' => rand(1, 5)
         ];
     }

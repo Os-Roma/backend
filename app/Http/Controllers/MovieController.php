@@ -2,27 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMovieRequest;
+use App\Http\Resources\Movie\{MovieResource, MovieCollection};
+use App\Http\Requests\{StoreMovieRequest, PaginateRequest};
 use Illuminate\Http\Request;
 use App\Models\Movie;
 
 class MovieController extends Controller
 {   
-    public function index(Request $request)
+    public function index(PaginateRequest $request)
     {
-        $movies = Movie::with(['actors', 'director', 'classification'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
-        return response()->json(['movies' => $movies], 200);
+        $movies = Movie::fields(request('fields'))
+                        ->title(request('title'))
+                        ->overview(request('overview'))
+                        ->release_date(request('release_date'))
+                        ->sort(request('sort'))
+                        ->paginate(request('per_page'));
+
+        return MovieCollection::make($movies);
     }
 
     public function store(StoreMovieRequest $request)
     {
         $movie = Movie::create($request->all());
-        return response()->json(['movie' => $movie], 201);
+        return MovieResource::make($movie);
     }
 
     public function show(Movie $movie)
     {
-        return response()->json(['movie' => $movie], 200);
+        return MovieResource::make($movie);
     }
 
     public function update(StoreMovieRequest $request, Movie $movie)
@@ -30,7 +37,7 @@ class MovieController extends Controller
 
         // dd($movie);
         $movie->update($request->all());
-        return response()->json(['movie' => $movie], 200);
+        return MovieResource::make($movie);
     }
 
     public function destroy(Movie $Movie)

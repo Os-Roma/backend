@@ -13,7 +13,6 @@ class Actor extends Model
 {
     use HasFactory, HasSlug, HasSorts, HasFields;
 
-
     protected     $table = 'actors';
     protected  $fillable = [ 'name', 'birth_date' ];
     public $allowedSorts = [ 'name', 'birth_date', 'created_at', 'updated_at' ];

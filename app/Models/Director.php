@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\{HasSorts, HasFields};
+use App\Models\Builders\DirectorBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Director extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, HasSorts, HasFields;
 
     protected $table = 'directors';
     protected $fillable = [ 'name', 'birth_date' ];
+    public $allowedSorts = [ 'name', 'birth_date', 'created_at', 'updated_at' ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new DirectorBuilder($query);
+    }
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {
@@ -37,12 +45,5 @@ class Director extends Model
     public function episodes()
     {
         return $this->hasMany(Episode::class);
-    }
-
-    public function scopeSearch($query, $name)
-    {
-        if (trim($name) != "") {
-            return $query->where('name', 'LIKE', "%$name%");
-        }
     }
 }

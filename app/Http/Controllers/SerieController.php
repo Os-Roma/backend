@@ -2,33 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSerieRequest;
+use App\Http\Resources\Serie\{SerieResource, SerieCollection};
+use App\Http\Requests\{StoreSerieRequest, PaginateRequest};
 use Illuminate\Http\Request;
 use App\Models\Serie;
 
 class SerieController extends Controller
 {   
-    public function index(Request $request)
+    public function index(PaginateRequest $request)
     {
-        $series = Serie::with([ 'seasons'])->Search($request->title)->orderBy('release_date', 'DESC')->paginate(30);  
-        return response()->json(['series' => $series], 200);
+        $series = Serie::fields(request('fields'))
+                        ->title(request('title'))
+                        ->overview(request('overview'))
+                        ->release_date(request('release_date'))
+                        ->sort(request('sort'))
+                        ->paginate(request('per_page'));
+
+        return SerieCollection::make($series);
     }
 
     public function store(StoreSerieRequest $request)
     {
         $serie = Serie::create($request->all());
-        return response()->json(['serie' => $serie], 201);
+        return SerieResource::make($serie);
     }
 
     public function show(Serie $series)
     {
-        return response()->json(['serie' => $series], 200);
+        return SerieResource::make($series);
     }
 
     public function update(StoreSerieRequest $request, Serie $series)
     {
         $series->update($request->all());
-        return response()->json(['serie' => $series], 200);
+        return SerieResource::make($series);
     }
 
     public function destroy(Serie $series)

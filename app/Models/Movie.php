@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\{HasSorts, HasFields};
+use App\Models\Builders\MovieBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Movie extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, HasSorts, HasFields;
 
     protected $table = 'movies';
-    protected $fillable = [ 'title', 'overview', 'release_date', 'director_id', 'gender_id', 'classification_id' ];
+    protected $fillable = [ 'title', 'overview', 'release_date', 'director_id', 'genre_id', 'classification_id' ];
+    public $allowedSorts = [ 'title', 'overview', 'release_date', 'created_at', 'updated_at' ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new MovieBuilder($query);
+    }
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {
@@ -44,15 +52,8 @@ class Movie extends Model
         return $this->belongsTo(Classification::class);
     }
 
-    public function gender()
+    public function genre()
     {
-        return $this->belongsTo(Gender::class);
-    }
-
-    public function scopeSearch($query, $title)
-    {
-        if (trim($title) != "") {
-            return $query->where('title', 'LIKE', "%$title%");
-        }
+        return $this->belongsTo(Genre::class);
     }
 }

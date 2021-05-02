@@ -1,27 +1,27 @@
 <?php
 
-namespace Tests\Unit\Gender;
+namespace Tests\Unit\Genre;
 
 // use PHPUnit\Framework\TestCase;
 use Tests\TestCase;
-use App\Models\Gender;
+use App\Models\Genre;
 use Illuminate\Database\Eloquent\Collection;
 
-class GenderTest extends TestCase
+class GenreTest extends TestCase
 {
     /** @test */
     
     public function a_gender_belongs_to_many_movies()
     {
-        $gender = new Gender;
-        $this->assertInstanceOf(Collection::class, $gender->movies);
+        $genre = new Genre;
+        $this->assertInstanceOf(Collection::class, $genre->movies);
     }
 
     /** @test */
 
     public function a_gender_belongs_to_many_series()
     {
-        $gender = new Gender;
-        $this->assertInstanceOf(Collection::class, $gender->series);
+        $genre = new Genre;
+        $this->assertInstanceOf(Collection::class, $genre->series);
     }
 }

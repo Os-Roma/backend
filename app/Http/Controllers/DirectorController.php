@@ -2,33 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDirectorRequest;
+use App\Http\Resources\Director\{DirectorResource, DirectorCollection};
+use App\Http\Requests\{StoreDirectorRequest, PaginateRequest};
 use Illuminate\Http\Request;
 use App\Models\Director;
 
 class DirectorController extends Controller
 {
-    public function index(Request $request)
+    public function index(PaginateRequest $request)
     {
-        $directors = Director::with(['movies', 'episodes'])->Search($request->name)->orderBy('name', 'ASC')->get();   
-        return response()->json(['directors' => $directors], 200);
+        $directors = Director::fields(request('fields'))
+                        ->name(request('name'))
+                        ->birth_date(request('birth_date'))
+                        ->movie(request('movie'))
+                        ->episode(request('episode'))
+                        ->sort(request('sort'))
+                        ->paginate(request('per_page'));
+
+        return DirectorCollection::make($directors);
     }
 
     public function store(StoreDirectorRequest $request)
     {
         $director = Director::create($request->all());
-        return response()->json(['director' => $director], 201);
+        return DirectorResource::make($director);
     }
 
     public function show(Director $director)
     {
-        return response()->json(['director' => $director], 200);
+        return DirectorResource::make($director);
     }
 
     public function update(StoreDirectorRequest $request, Director $director)
     {
         $director->update($request->all());
-        return response()->json(['director' => $director], 200);
+        return DirectorResource::make($director);
     }
 
     public function destroy(Director $director)

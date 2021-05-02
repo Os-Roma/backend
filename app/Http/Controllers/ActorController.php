@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\{ActorResource, ActorCollection};
+use App\Http\Resources\Actor\{ActorResource, ActorCollection};
 use App\Http\Requests\{StoreActorRequest, PaginateRequest};
 use Illuminate\Http\Request;
 use App\Models\Actor;
@@ -11,7 +11,14 @@ class ActorController extends Controller
 {   
     public function index(PaginateRequest $request)
     {   
-        $actors = Actor::fields(request('fields'))->search(request('search'))->sort(request('sort'))->paginate(request('per_page'));
+        $actors = Actor::fields(request('fields'))
+                        ->name(request('name'))
+                        ->birth_date(request('birth_date'))
+                        ->movie(request('movie'))
+                        ->episode(request('episode'))
+                        ->sort(request('sort'))
+                        ->paginate(request('per_page'));
+
         return ActorCollection::make($actors);
     }
 

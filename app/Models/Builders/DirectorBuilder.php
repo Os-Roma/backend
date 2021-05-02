@@ -4,7 +4,7 @@ namespace App\Models\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
 
-class ActorBuilder extends Builder
+class DirectorBuilder extends Builder
 {	
     public function name($name)
     {

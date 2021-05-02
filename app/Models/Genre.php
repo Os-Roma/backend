@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\{HasSorts, HasFields};
+use App\Models\Builders\GenreBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Gender extends Model
+class Genre extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, HasSorts, HasFields;
 
-    protected $table = 'genders';
+    protected $table = 'genres';
     protected $fillable = [ 'name', 'description' ];
+    public $allowedSorts = [ 'name', 'description', 'created_at', 'updated_at' ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new GenreBuilder($query);
+    }
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {
@@ -37,12 +45,5 @@ class Gender extends Model
     public function series()
     {
         return $this->hasMany(Serie::class);
-    }
-
-    public function scopeSearch($query, $name)
-    {
-        if (trim($name) != "") {
-            return $query->where('name', 'LIKE', "%$name%");
-        }
     }
 }

@@ -2,33 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreClassificationRequest;
+use App\Http\Resources\Classification\{ClassificationResource, ClassificationCollection};
+use App\Http\Requests\{StoreClassificationRequest, PaginateRequest};
 use Illuminate\Http\Request;
 use App\Models\Classification;
 
 class ClassificationController extends Controller
 {   
-    public function index(Request $request)
+    public function index(PaginateRequest $request)
     {
-        $classifications = Classification::with(['series', 'movies'])->Search($request->name)->orderBy('name', 'ASC')->get();
-        return response()->json(['classifications' => $classifications], 200);
+        $classifications = Classification::fields(request('fields'))
+                        ->name(request('name'))
+                        ->description(request('description'))
+                        ->sort(request('sort'))
+                        ->paginate(request('per_page'));
+
+        return ClassificationCollection::make($classifications);
     }
 
     public function store(StoreClassificationRequest $request)
     {
         $classification = Classification::create($request->all());
-        return response()->json(['classification' => $classification], 201);
+        return ClassificationResource::make($classification);
     }
 
     public function show(Classification $classification)
     {
-        return response()->json(['classification' => $classification], 200);
+        return ClassificationResource::make($classification);
     }
 
     public function update(StoreClassificationRequest $request, Classification $classification)
     {   
         $classification->update($request->all());
-        return response()->json(['classification' => $classification], 200);
+        return ClassificationResource::make($classification);
     }
 
     public function destroy(Classification $classification)

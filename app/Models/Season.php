@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\{HasSorts, HasFields};
+use App\Models\Builders\SeasonBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Season extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, HasSorts, HasFields;
 
     protected $table = 'seasons';
     protected $fillable = [ 'title', 'overview', 'release_date', 'serie_id' ];
+    public $allowedSorts = [ 'title', 'overview', 'release_date', 'created_at', 'updated_at' ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new SeasonBuilder($query);
+    }
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {
@@ -37,12 +45,5 @@ class Season extends Model
     public function episodes()
     {
         return $this->hasMany(Episode::class);
-    }
-
-    public function scopeSearch($query, $title)
-    {
-        if (trim($title) != "") {
-            return $query->where('title', 'LIKE', "%$title%");
-        }
     }
 }

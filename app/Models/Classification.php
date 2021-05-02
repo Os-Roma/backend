@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use App\Models\Traits\{HasSorts, HasFields};
+use App\Models\Builders\ClassificationBuilder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Classification extends Model
 {
-    use HasFactory, HasSlug;
+    use HasFactory, HasSlug, HasSorts, HasFields;
 
     protected $table = 'classifications';
     protected $fillable = [ 'name', 'description' ];
+    public $allowedSorts = [ 'name', 'description', 'created_at', 'updated_at' ];
+
+    public function newEloquentBuilder($query)
+    {
+        return new ClassificationBuilder($query);
+    }
 
     public function getSlugOptions() : SlugOptions // Get the options for generating the slug.
     {
@@ -37,12 +45,5 @@ class Classification extends Model
     public function series()
     {
         return $this->hasMany(Serie::class);
-    }
-
-    public function scopeSearch($query, $name)
-    {
-        if (trim($name) != "") {
-            return $query->where('name', 'LIKE', "%$name%");
-        }
     }
 }

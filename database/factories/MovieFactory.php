@@ -26,7 +26,7 @@ class MovieFactory extends Factory
             'overview' => $this->faker->text(),
             'release_date' => now(),
             'director_id' => rand(1, 20),
-            'gender_id' => rand(1, 5),
+            'genre_id' => rand(1, 5),
             'classification_id' => rand(1, 5)
         ];
     }

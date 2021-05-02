@@ -20,7 +20,7 @@ class CreateMoviesTable extends Migration
             $table->string('overview');
             $table->date('release_date');
             $table->foreignId('director_id')->nullable()->constrained();
-            $table->foreignId('gender_id')->nullable()->constrained();
+            $table->foreignId('genre_id')->nullable()->constrained();
             $table->foreignId('classification_id')->nullable()->constrained();
             $table->timestamps();
         });

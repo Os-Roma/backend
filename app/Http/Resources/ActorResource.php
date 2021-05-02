@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Actor;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -23,7 +23,6 @@ class ActorResource extends JsonResource
             ],
             'included' => $this->when(strstr(request('include'), 'movies'), $this->resource->movies ),
                         $this->when(strstr(request('include'), 'episodes'), $this->resource->episodes ),
-            
         ];
     }
 }

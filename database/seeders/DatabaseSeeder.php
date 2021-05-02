@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\{User, Gender, Classification, Actor, Director, Movie, Serie, Season, Episode};
+use App\Models\{User, Genre, Classification, Actor, Director, Movie, Serie, Season, Episode};
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('adminadmin'),
         ]);
 
-        Gender::factory(5)->create();
+        Genre::factory(5)->create();
         Classification::factory(5)->create();
         Actor::factory()->count(50)->create();
         Director::factory(20)->create();

@@ -19,7 +19,7 @@ class CreateSeriesTable extends Migration
             $table->string('title');
             $table->string('overview');
             $table->date('release_date');
-            $table->foreignId('gender_id')->nullable()->constrained();
+            $table->foreignId('genre_id')->nullable()->constrained();
             $table->foreignId('classification_id')->nullable()->constrained();
             $table->timestamps();
         });
