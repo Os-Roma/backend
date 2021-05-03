@@ -5,18 +5,18 @@ This challenge aims to test basic skills in PHP development and a bit of data / 
 
 Includes endpoints with REST API specification:
 
-#Parameters:
+<b>Parameters</b>
 
-Fields: to choose the specific fields. For example, `movies?fields=title,release_date` 
+<b>Fields</b>: to choose the specific fields. For example, `movies?fields=title,release_date` 
 
-Sort: to sort by one or more specific fields, use the sign `-` to indicate DESC. `actors?sort=birth_date,-name` 
+<b>Sort</b>: to sort by one or more specific fields, use the sign `-` to indicate DESC. `actors?sort=birth_date,-name` 
 
-Include: with this parameter we bring the relations. Accepts multiple parameters. for example. `classification?include=movies,series`
+<b>Include</b>: with this parameter we bring the relations. Accepts multiple parameters. for example. `classification?include=movies,series`
 
-Filter: allows you to filter by any field. for example,`movies?title=pokemon&release_date=2021`
+<b>Filter</b>: allows you to filter by any field. for example,`movies?title=pokemon&release_date=2021`
 
 
-Per_page: allows defining how many records we want per page, accompanied by `page`, where we indicate what page number we want. For example, `episodes?per_page=5&page=2`
+<b>Per_page</b>: allows defining how many records we want per page, accompanied by `page`, where we indicate what page number we want. For example, `episodes?per_page=5&page=2`
 
 
 <b>INCLUDE</b>
