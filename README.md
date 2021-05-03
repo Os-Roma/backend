@@ -5,7 +5,7 @@ This challenge aims to test basic skills in PHP development and a bit of data / 
 
 Includes endpoints with REST API specification:
 
-###Parameters:
+#Parameters:
 
 Fields: to choose the specific fields. For example, `movies?fields=title,release_date` 
 
