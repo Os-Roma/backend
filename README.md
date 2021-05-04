@@ -3,7 +3,7 @@
 This challenge aims to test basic skills in PHP development and a bit of data / entity modeling. The idea is to build an HTTP REST API.
 
 
-Includes endpoints with REST API specification:
+Includes endpoints with JSON:API specification:
 
 <b>Parameters</b>
 
@@ -35,9 +35,9 @@ Includes endpoints with REST API specification:
 
 Please clone the repository, enter the generated folder and configure the `.env` file with the `.env.example` template.
 
-Run `php artisan key:generate --ansi` to generate the key in the `.env` file.
-
 Run `composer update` to install all the dependecies.
+
+Run `php artisan key:generate --ansi` to generate the key in the `.env` file.
 
 Run `php artisan cache:clear` and `php artisan config:clear`.
 
@@ -50,20 +50,20 @@ Populate the tables by running the command `php artisan db:seed`.
 
 ```php
     
-    # DatabaseSeeder.php
+# DatabaseSeeder.php
 
-    Genre::factory(5)->create();
-    Classification::factory(5)->create();
-    Actor::factory()->count(50)->create();
-    Director::factory(20)->create();
-    Movie::factory(30)->create()->each(function ($movie) {
-        $movie->actors(['actorable_id' => rand(1, 10)])->attach($this->array(rand(1, 50)));
-    });
-    Serie::factory(10)->create();
-    Season::factory(20)->create();
-    Episode::factory(200)->create()->each(function ($episode) {
-        $episode->actors()->attach($this->array(rand(1, 50)));
-    });
+Genre::factory(5)->create();
+Classification::factory(5)->create();
+Actor::factory()->count(50)->create();
+Director::factory(20)->create();
+Movie::factory(30)->create()->each(function ($movie) {
+    $movie->actors(['actorable_id' => rand(1, 10)])->attach($this->array(rand(1, 50)));
+});
+Serie::factory(10)->create();
+Season::factory(20)->create();
+Episode::factory(200)->create()->each(function ($episode) {
+    $episode->actors()->attach($this->array(rand(1, 50)));
+});
 
 ```
 
@@ -72,11 +72,11 @@ When seeding the database, a user will be created with the mail `admin@admin.com
 
 ```php
 
-	 User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('adminadmin'),
-        ]);
+User::create([
+    'name' => 'Administrator',
+    'email' => 'admin@admin.com',
+    'password' => Hash::make('adminadmin'),
+]);
      
 ```
 

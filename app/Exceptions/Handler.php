@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
         } elseif ($exception instanceof \Tymon\JWTAuth\Exceptions\JWTException) {
             return response()->json(['error' => 'token absent'], 400);
         } elseif ($exception instanceof ModelNotFoundException) {
-            return response()->jason(0, 404);
+            return response()->json(0, 404);
         }
 
         return parent::render($request, $exception);

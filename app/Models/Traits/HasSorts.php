@@ -29,7 +29,5 @@ trait HasSorts
 
         if( ! collect($this->allowedSorts)->contains($sortField))
             abort(400, "Invalid Query Parameter, {$sortField} is not allowed.");
-        
-        $actors = $query->get();  
     }
 }

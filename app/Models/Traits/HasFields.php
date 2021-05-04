@@ -21,9 +21,6 @@ trait HasFields
         }
 
         if( ! collect($this->allowedSorts)->contains($field))
-            abort(400, "Invalid Query Parameter, {$field} is not allowed.");
-        
-        $actors = $query->get();  
-        // return $this->morphedByMany(Episode::class, 'actorable', 'actorables');
+            abort(400, "Invalid Query Parameter, {$field} is not allowed."); 
     }
 }
